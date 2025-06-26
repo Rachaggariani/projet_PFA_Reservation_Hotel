@@ -1,0 +1,63 @@
+<div class="form-container">
+  <h2>Formulaire d'ajout d'hôtel</h2>
+
+  <form [formGroup]="hotelForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="nomHotel">Nom de l'hôtel</label>
+      <input type="text" id="nomHotel" formControlName="nomHotel" required>
+      <div *ngIf="hotelForm.get('nomHotel')?.invalid && hotelForm.get('nomHotel')?.touched" class="error-message">
+        Le nom de l'hôtel est requis
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="adresseHotel">Adresse de l'hôtel</label>
+      <input type="text" id="adresseHotel" formControlName="adresseHotel" required>
+      <div *ngIf="hotelForm.get('adresseHotel')?.invalid && hotelForm.get('adresseHotel')?.touched" class="error-message">
+        L'adresse de l'hôtel est requise
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="images">Image</label>
+      <input type="file" id="images" (change)="onFileChange($event)" accept="image/*">
+    </div>
+
+    <div class="form-group">
+      <label>Note (rating)</label>
+      <div class="rating-stars">
+        <input type="radio" id="star1" name="rating" [value]="1" (click)="onRatingChange(1)">
+        <label for="star1">★</label>
+        <input type="radio" id="star2" name="rating" [value]="2" (click)="onRatingChange(2)">
+        <label for="star2">★</label>
+        <input type="radio" id="star3" name="rating" [value]="3" (click)="onRatingChange(3)">
+        <label for="star3">★</label>
+        <input type="radio" id="star4" name="rating" [value]="4" (click)="onRatingChange(4)">
+        <label for="star4">★</label>
+        <input type="radio" id="star5" name="rating" [value]="5" (click)="onRatingChange(5)">
+        <label for="star5">★</label>
+      </div>
+      <div *ngIf="selectedRating === 0 && hotelForm.touched" class="error-message">
+        Veuillez sélectionner une note
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>État des chambres</label>
+      <div class="chambres-container">
+        <div class="chambre-option" *ngFor="let chambre of chambres" 
+             [class.disponible]="chambre.disponible" 
+             [class.occupee]="!chambre.disponible">
+          <input type="checkbox" [id]="chambre.numero" [checked]="chambre.disponible" 
+                 (change)="toggleChambreDisponibility(chambre)">
+          <label [for]="chambre.numero">
+            <span class="chambre-titre">{{chambre.numero}}</span>
+            <span class="chambre-etat">{{chambre.disponible ? 'Disponible' : 'Occupée'}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!hotelForm.valid || selectedRating === 0">Ajouter</button>
+  </form>
+</div>

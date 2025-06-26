@@ -1,0 +1,58 @@
+<!-- hotel-edit.component.html -->
+<div class="form-container">
+  <h2>Modifier l'hôtel</h2>
+  <form [formGroup]="hotelForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="nomHotel">Nom de l'hôtel</label>
+      <input type="text" id="nomHotel" formControlName="nomHotel">
+    </div>
+
+    <div class="form-group">
+      <label for="adresseHotel">Adresse de l'hôtel</label>
+      <input type="text" id="adresseHotel" formControlName="adresseHotel">
+    </div>
+
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input type="file" id="image" (change)="onFileSelected($event)">
+      <small class="text-muted">Choisir un fichier | Aucun fichier choisi</small>
+    </div>
+
+   <div class="form-group">
+      <label>Note (rating)</label>
+      <div class="rating-stars">
+        <input type="radio" id="star5" name="rating" value="5" formControlName="rating">
+        <label for="star5">★</label>
+        
+        <input type="radio" id="star4" name="rating" value="4" formControlName="rating">
+        <label for="star4">★</label>
+        
+        <input type="radio" id="star3" name="rating" value="3" formControlName="rating">
+        <label for="star3">★</label>
+        
+        <input type="radio" id="star2" name="rating" value="2" formControlName="rating">
+        <label for="star2">★</label>
+        
+        <input type="radio" id="star1" name="rating" value="1" formControlName="rating">
+        <label for="star1">★</label>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <h5>État des chambres</h5>
+      <div formArrayName="chambres" class="chambres-container">
+        <div *ngFor="let chambre of chambres.controls; let i = index" [formGroupName]="i" class="chambre-option" [class.disponible]="chambre.get('disponible')?.value" [class.occupee]="!chambre.get('disponible')?.value">
+          <label>
+            <span class="chambre-titre">Chambre {{ chambre.get('numero')?.value }}</span>
+            <span class="chambre-etat">{{ chambre.get('disponible')?.value ? 'Disponible' : 'Occupée' }}</span>
+            <input type="checkbox" formControlName="disponible" style="display: none;">
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">Enregistrer</button>
+    <!-- <button type="button" (click)="router.navigate(['/home'])">Annuler</button> -->
+  </form>
+</div>

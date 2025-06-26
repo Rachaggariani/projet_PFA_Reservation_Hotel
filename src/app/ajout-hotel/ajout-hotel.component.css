@@ -1,0 +1,148 @@
+/* Pour occuper toute la page */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Étendre le conteneur de formulaire */
+.form-container {
+  height: 100%;
+  width: 100%;
+  padding: 30px 40px;
+  background-color: #fff;
+  color: #95541b;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  color: #c6bdb2;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+  padding: 10px;
+  border: 1px solid #b69d22;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus,
+textarea:focus {
+  border-color: #6c4efc;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 5px;
+}
+
+.rating-stars input[type="radio"] {
+  display: none;
+}
+
+.rating-stars label {
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.rating-stars input[type="radio"]:checked ~ label,
+.rating-stars input[type="radio"]:checked + label {
+  color: #a685fa;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #7c65f8;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #6c4efc;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.chambres-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chambre-option {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  width: 120px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.chambre-option.disponible {
+  border-color: #00c853;
+  background-color: #e8f5e9;
+}
+
+.chambre-option.occupee {
+  border-color: #d32f2f;
+  background-color: #ffebee;
+}
+
+.chambre-option label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.chambre-titre {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.chambre-etat {
+  font-size: 12px;
+  color: #666;
+}
