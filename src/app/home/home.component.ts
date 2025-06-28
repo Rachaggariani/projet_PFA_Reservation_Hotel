@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Hotel, HotelService } from '../Services/hotel.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +10,53 @@ import { Hotel, HotelService } from '../Services/hotel.service';
 })
 export class HomeComponent implements OnInit {
   hotels: Hotel[] = [];
-  
-  loading = true;
+  showLanguageDropdown = false;
+    currentLanguage: string = 'fr'; // Définit la langue par défaut
+
+  loading = false;
     isLoading = false; 
 
   error: string | null = null;
 
   constructor(
     private hotelService: HotelService,
-    private router: Router
-  ) { }
+    private router: Router,
+    public translate: TranslateService
+  ) { 
+ // Configuration minimaliste garantie
+    translate.addLangs(['en', 'fr', 'ar']);
+     this.translate.setDefaultLang('fr');
+    this.translate.use('fr');
+    
+    const langToUse = localStorage.getItem('userLang') || 
+                     translate.getBrowserLang() || 
+                     'fr';
+    translate.use(langToUse.match(/en|fr|ar/) ? langToUse : 'fr');
+  }
+toggleLanguageDropdown() {
+    this.showLanguageDropdown = !this.showLanguageDropdown;
+  }
 
+  changeLanguage(lang: string) {
+    this.currentLanguage = lang;
+    this.showLanguageDropdown = false;
+    // Change la langue dans ngx-translate si utilisé
+    this.translate.use(lang);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   ngOnInit(): void {
     this.loadHotels();
   }
@@ -37,20 +74,17 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-navigateToChambre() {
-    this.isLoading = true;
-    
-    setTimeout(() => {
-     // this.router.navigate(['/hotels',hotelId,'chambres']);
-      this.isLoading = false;
-    }, 2000); // 2 secondes de délai
-  }
 
-  navigateToChambres(hotelId: number | undefined): void {
-    if (hotelId) {
+ navigateToChambres(hotelId: number | undefined): void {
+  if (hotelId) {
+    this.loading = true;
+
+    setTimeout(() => {
       this.router.navigate(['/hotels', hotelId, 'chambres']);
-    }
+      this.loading = false;
+    }, 2000); // ⏱️ 60 secondes
   }
+}
 
   getStars(rating: number): string {
     const fullStars = '★'.repeat(Math.floor(rating));
@@ -92,4 +126,5 @@ deleteHotel(id?: number) {
     });
   }
 }
+
 }

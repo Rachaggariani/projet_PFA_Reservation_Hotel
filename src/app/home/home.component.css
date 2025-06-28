@@ -54,10 +54,9 @@ body {
 
 .hero-button {
   padding: 0.8rem 2rem;
-  background-color: #fff;
-  color: var(--primary-color);
+  color: black;
   border: none;
-  border-radius: 30px;
+  border-radius: 4px;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
@@ -438,4 +437,133 @@ font-size: 1.2rem;
     transition: none !important;
   }
 }
+
+/*Translation*/
+.language-switcher {
+  display: inline-block;
+  position: relative;
+}
+
+.language-button {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.language-button:hover {
+  background-color: #f5f5f5;
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.language-flag {
+  width: 20px;
+  height: 15px;
+  margin-right: 8px;
+  background-size: cover;
+}
+
+.tunisian-flag {
+   background-image: url('../../assets/images/drapeauTunisie.png');
+ /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="%23E70013"/><circle cx="1.5" cy="1" r="0.4" fill="white"/><circle cx="1.5" cy="1" r="0.3" fill="%23E70013"/><path fill="none" stroke="white" stroke-width="0.05" d="M1.5 0.7L1.5 1.3M1.2 1L1.8 1"/><path fill="none" stroke="white" stroke-width="0.05" d="M1.3 0.8L1.7 1.2M1.3 1.2L1.7 0.8"/></svg>');
+*/}
+
+.french-flag {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><path fill="%230055A4" d="M0 0h1v2H0z"/><path fill="white" d="M1 0h1v2H1z"/><path fill="%23EF4135" d="M2 0h1v2H2z"/></svg>');
+}
+
+.english-flag {
+ /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><clipPath id="a"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="b"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(%23a)"><path fill="%2300246B" d="M0 0v30h60V0z"/><path fill="white" d="M0 0l60 30m0-30L0 30" stroke-width="6"/><path fill="%23CF142B" d="M0 0l60 30m0-30L0 30" clip-path="url(%23b)" stroke-width="4"/><path fill="white" d="M30 0v30M0 15h60" stroke-width="10"/><path fill="%23CF142B" d="M30 0v30M0 15h60" stroke-width="6"/></g></svg>');
+*/
+ background-image: url('../../assets/images/Ang.png');
+}
+
+.language-dropdown {
+  display: none;
+  position: absolute;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+border: none;
+}
+
+.language-switcher:hover .language-dropdown {
+  display: block;
+}
+
+.language-dropdown a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.language-dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+.current-language {
+  font-weight: bold;
+}
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espacement entre les éléments */
+}
+
+.language-switcher {
+  position: relative;
+  display: inline-block;
+}
+
+.language-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.language-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+  z-index: 1;
+  border-radius: 4px;
+  padding: 5px 0;
+}
+
+.language-switcher:hover .language-dropdown {
+  display: block;
+}
+
+.language-option {
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+
+.language-flag {
+  width: 20px;
+  height: 15px;
+  background-size: cover;
+  border-radius: 2px;
+}
+
 

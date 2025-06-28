@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; // <-- Ajoutez cette ligne
+import { HttpClient, HttpClientModule } from '@angular/common/http'; // <-- Ajoutez cette ligne
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -16,7 +16,12 @@ import { UserService } from './Services/user.service';
 import { AjoutHotelComponent } from './ajout-hotel/ajout-hotel.component';
 import { HotelService } from './Services/hotel.service';
 import { EditHotelComponent } from './edit-hotel/edit-hotel.component';
-
+import { TranslateComponent } from './translate/translate.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,14 +33,23 @@ import { EditHotelComponent } from './edit-hotel/edit-hotel.component';
     HabilitationComponent,
     ChatAdminComponent,
     AjoutHotelComponent,
-    EditHotelComponent
+    EditHotelComponent,
+    TranslateComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,// Ajoutez ceci
     FormsModule, // <-- Ajoutez ce module
     HttpClientModule, // <-- Ajoutez ce module
-    AppRoutingModule
+    AppRoutingModule,
+  TranslateModule.forRoot({
+      defaultLanguage: 'fr',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [ChatService,UserService,HotelService],
   bootstrap: [AppComponent]

@@ -12,7 +12,8 @@ export class ChambreComponent implements OnInit {
     @ViewChild('exitButton') exitButton!: ElementRef;
 
   hotelId!: number;
-  loading = true;
+  loading = false;
+      isLoading = false; 
   error: string | null = null;
  roomImages: {[key: string]: string} = {};
   // Structure de données simplifiée
@@ -26,7 +27,8 @@ export class ChambreComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private chambreService: ChambreService
+    private chambreService: ChambreService,
+     private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class ChambreComponent implements OnInit {
   }
 
   loadData(): void {
+    this.loading=true;
     forkJoin([
       this.chambreService.getDisponibilite(this.hotelId),
       this.chambreService.getChambresByHotel(this.hotelId),
@@ -116,6 +119,21 @@ export class ChambreComponent implements OnInit {
     default:
       return 1; // Default to 1 if type is unknown
   }
+}
+navigateToChambres(roomTypeKey: string): void {
+  this.isLoading = true;
+
+  setTimeout(() => {
+    // Redirige vers réservation avec queryParam "type" et hotelId
+    this.router.navigate(['/reservation'], {
+      queryParams: {
+        type: roomTypeKey,
+        hotelId: this.hotelId
+      }
+    });
+
+     this.isLoading = false;
+  }, 2000); // ⏱️ délai simulé de 2 secondes (tu peux mettre 60000 si tu veux 1 minute)
 }
 
 }
